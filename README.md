@@ -46,3 +46,17 @@ Check that the user was added:
 ```bash
 SELECT User FROM mysql.user;
 ```
+
+3) *Start a communication Node.js with MariaDB*
+
+First install the packages for this:
+
+```bash
+npm install
+```
+
+Set the username and password in `config/config.js` and tell Git to not track does changes:
+
+```bash
+git update-index --assume-unchanged src/config/config.js
+```

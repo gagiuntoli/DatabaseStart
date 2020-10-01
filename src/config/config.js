@@ -1,6 +1,7 @@
-const privateData = {
-  username: <username>,
-  password: <password>
-}
 
-module.export = privateData;
+const privateData = [
+  <user>,
+  <password>
+]
+
+module.exports = privateData;

@@ -8,8 +8,17 @@ class App extends Component {
     super();
     this.state = {
       german: "",
-      english: ""
+      english: "",
+      wordList: [],
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:3001/api/get').then((response)=>{
+      this.setState({
+        wordList: response.data
+      })
+    })
   }
 
   handleGermanWord = (e) =>{
@@ -36,6 +45,12 @@ class App extends Component {
   }
 
   render() {
+
+    const wordlist = this.state.wordList.map((word, id) => {
+      return (
+        <h1 key={id}>German: {word.german} English: {word.english}</h1>
+      )
+    })
     return (
       <div className="App">
         <h1>CRUD APPLICATION</h1>
@@ -46,6 +61,7 @@ class App extends Component {
           <label>Word in English</label>
           <input type="text" name="english" onChange={this.handleEnglishWord} value={this.state.english}/>
           <button onClick={this.submitRequest}>Submit</button>
+          {wordlist}
         </div>
       </div>
     );

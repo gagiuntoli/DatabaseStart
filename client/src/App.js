@@ -44,11 +44,33 @@ class App extends Component {
      })
   }
 
+  deleteCard = (id) => {
+    let wordList = [...this.state.wordList]
+    wordList.splice(id, 1);
+    this.setState({
+      wordList: wordList
+    })
+
+    // Delete from database
+  }
+
   render() {
 
     const wordlist = this.state.wordList.map((word, id) => {
       return (
-        <h1 key={id}>German: {word.german} English: {word.english}</h1>
+          <div className="mycard" key={id}>
+          <div className="col m5 l5">
+            <div className="card blue-grey darken-1">
+              <div className="card-content white-text">
+                <span className="card-title">{word.german}</span>
+                <p>Explanation: {word.english}</p>
+              </div>
+              <div className="card-action">
+                <button onClick={(e) => {this.deleteCard(id)}}>Delete</button>
+              </div>
+            </div>
+          </div>
+          </div>
       )
     })
     return (
@@ -61,11 +83,12 @@ class App extends Component {
           <label>Word in English</label>
           <input type="text" name="english" onChange={this.handleEnglishWord} value={this.state.english}/>
           <button onClick={this.submitRequest}>Submit</button>
-          {wordlist}
         </div>
+        {wordlist}
       </div>
     );
   }
 }
+
 
 export default App;

@@ -32,6 +32,15 @@ app.post("/api/insert", (req, res)=> {
   })
 })
 
+app.delete("/api/delete/:german", (req, res)=> {
+  const german = req.params.german;
+  const sqlDelete =  `DELETE FROM words WHERE german = '${german}'`;
+  db.query(sqlDelete, (err, result)=>{
+    console.log(err)
+  })
+})
+
+
 app.listen(3001, () => {
   console.log("running on port 3001")
 })

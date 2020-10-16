@@ -42,16 +42,27 @@ class App extends Component {
      }).then(()=>{
        alert('succesful insert')
      })
+
+     let wordList = [...this.state.wordList];
+     wordList.push({
+       german: this.state.german,
+       english: this.state.english
+     })
+     this.setState({
+       wordList: wordList,
+     })
   }
 
   deleteCard = (id) => {
+    console.log(this.state.wordList[id])
+    // Delete from database
+    axios.delete(`http://localhost:3001/api/delete/${this.state.wordList[id].german}`);
+
     let wordList = [...this.state.wordList]
     wordList.splice(id, 1);
     this.setState({
       wordList: wordList
     })
-
-    // Delete from database
   }
 
   render() {
